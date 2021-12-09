@@ -66,6 +66,7 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 // Functions
 
+//Transaction Histroy
 const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
 
@@ -87,6 +88,7 @@ const displayMovements = function (movements, sort = false) {
   });
 };
 
+//Calculate and display balance
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
   labelBalance.textContent = `${acc.balance}€`;
@@ -114,6 +116,7 @@ const calcDisplaySummary = function (acc) {
   labelSumInterest.textContent = `${interest}€`;
 };
 
+//Create user name on login
 const createUsernames = function (accs) {
   accs.forEach(function (acc) {
     acc.username = acc.owner
@@ -125,6 +128,7 @@ const createUsernames = function (accs) {
 };
 createUsernames(accounts);
 
+//Updates ui based on login and logout
 const updateUI = function (acc) {
   // Display movements
   displayMovements(acc.movements);
@@ -140,6 +144,7 @@ const updateUI = function (acc) {
 // Event handlers
 let currentAccount;
 
+//Handles Login
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting
   e.preventDefault();
@@ -165,6 +170,7 @@ btnLogin.addEventListener('click', function (e) {
   }
 });
 
+//Handles Transfer
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
   const amount = Number(inputTransferAmount.value);
@@ -203,6 +209,7 @@ btnLoan.addEventListener('click', function (e) {
   inputLoanAmount.value = '';
 });
 
+//Close account
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
 
@@ -226,6 +233,7 @@ btnClose.addEventListener('click', function (e) {
   inputCloseUsername.value = inputClosePin.value = '';
 });
 
+//Sorts transactions
 let sorted = false;
 btnSort.addEventListener('click', function (e) {
   e.preventDefault();
